@@ -1,5 +1,5 @@
-
 Chat cu camere virtuale:
+
 Server-ul are o lista de camere virtuale, fiercare camera avand asociata o adresa de multicast, si raspunde la pachetele primite pe un anumit port prin care livreaza lista camerelor virtuale cu adresele de multicast aferente;
 In aplicatia server se pot adauga sau sterge camere virtuale;
 La pornire, clientul trimite un pachet pe adresa de broascast a subretelei pe portul pe care asculta server-ul pentru a primi lista de camere virtuale si porturile lor aferente;
