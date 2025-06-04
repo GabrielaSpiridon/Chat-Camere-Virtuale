@@ -24,7 +24,7 @@ class ChatServer:
 
 
     def _generate_multicast_address(self):
-        """Genereaza o adresa de multicast unica pentru o noua camera."""
+        "Genereaza o adresa de multicast unica pentru o noua camera."
         # Clasele de adrese multicast sunt de la 224.0.0.0 la 239.255.255.255
        
         if self.next_multicast_ip_octet > 254:
@@ -56,14 +56,14 @@ class ChatServer:
         self.send_room_update_notification("delete", room_name, multicast_ip)
 
     def get_room_list(self):
-        """Returneaza lista camerelor virtuale cu adresele de multicast."""
+        "Returneaza lista camerelor virtuale cu adresele de multicast."
         return {
             "rooms": self.rooms,
             "message_port": MESSAGE_PORT # Clientul are nevoie si de portul de mesaje
         }
 
     def handle_discovery_requests(self):
-        """Asculta cereri de descoperire (broadcast) de la clienti."""
+        "Asculta cereri de descoperire (broadcast) de la clienti."
         while True:
             try:
                 data, addr = self.discovery_socket.recvfrom(1024)
@@ -75,7 +75,7 @@ class ChatServer:
                 print(f"Eroare in thread-ul de descoperire: {e}")
 
     def send_room_update_notification(self, action, room_name, multicast_ip):
-        """Trimite o notificare broadcast la adaugarea/stergerea unei camere."""
+        "Trimite o notificare broadcast la adaugarea/stergerea unei camere."
         notification = {
             "action": action, # "add" sau "delete"
             "room_name": room_name,

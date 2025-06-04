@@ -24,7 +24,7 @@ class ChatClient:
         print(f"Clientul va asculta notificari de la server pe portul: {SERVER_NOTIFICATION_PORT}")
 
     def discover_server(self):
-        """Trimite un pachet broadcast pentru a descoperi serverul si a primi lista de camere."""
+        "Trimite un pachet broadcast pentru a descoperi serverul si a primi lista de camere."
         print(f"Caut serverul pe {CLIENT_BROADCAST_IP}:{SERVER_PORT_DISCOVERY}...")
         try:
             self.discovery_socket.sendto(b"DISCOVER_SERVER", (CLIENT_BROADCAST_IP, SERVER_PORT_DISCOVERY))
@@ -44,7 +44,7 @@ class ChatClient:
             return False
 
     def display_rooms(self):
-        """Afiseaza camerele disponibile."""
+        "Afiseaza camerele disponibile."
         if self.rooms:
             print("\n--- Camere disponibile ---")
             for name, ip in self.rooms.items():
@@ -54,7 +54,7 @@ class ChatClient:
             print("Nu exista camere disponibile momentan.")
 
     def join_room(self, room_name):
-        """Clientul se alatura unui grup multicast al unei camere virtuale."""
+        "Clientul se alatura unui grup multicast al unei camere virtuale."
         if room_name not in self.rooms:
             print(f"Camera '{room_name}' nu exista.")
             return
@@ -93,7 +93,7 @@ class ChatClient:
             self.multicast_group_socket = None
 
     def leave_room(self):
-        """Clientul paraseste grupul multicast al camerei curente."""
+        "Clientul paraseste grupul multicast al camerei curente."
         if not self.current_room:
             print("Nu esti in nicio camera.")
             return
@@ -112,8 +112,9 @@ class ChatClient:
                 print(f"Eroare la parasirea camerei: {e}")
         self.current_room = None
 
+
     def send_message(self, message):
-        """Trimite un mesaj catre adresa de multicast a camerei curente."""
+        "Trimite un mesaj catre adresa de multicast a camerei curente."
         if not self.current_room:
             print("Trebuie sa te alaturi unei camere pentru a trimite mesaje.")
             return
@@ -133,7 +134,7 @@ class ChatClient:
             print(f"Eroare la trimiterea mesajului: {e}")
 
     def listen_for_multicast_messages(self):
-        """Asculta mesaje pe adresa de multicast a camerei curente."""
+        "Asculta mesaje pe adresa de multicast a camerei curente."
         if not self.multicast_group_socket:
             print("Nu ai un socket de multicast deschis pentru a asculta mesaje.")
             return
@@ -151,7 +152,7 @@ class ChatClient:
                 break # Iesi din bucla daca socket-ul e inchis sau nu mai esti in camera
 
     def listen_for_server_notifications(self):
-        """Asculta notificari broadcast de la server (adaugare/stergere camere)."""
+        "Asculta notificari broadcast de la server (adaugare/stergere camere)."
         while True:
             try:
                 data, addr = self.notification_socket.recvfrom(1024)
